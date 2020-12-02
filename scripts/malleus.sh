@@ -96,12 +96,12 @@ mvn \
 -Dorg.jitsi.malleus.duration=$DURATION \
 -Dorg.jitsi.malleus.room_name_prefix=$ROOM_NAME_PREFIX \
 -Dorg.jitsi.malleus.regions=$REGIONS \
+-Dorg.jitsi.malleus.jwt=$JWT \
 -Dremote.address=$HUB_URL \
 -Djitsi-meet.tests.toRun=MalleusJitsificus \
 -Dwdm.gitHubTokenName=jitsi-jenkins \
 -Dremote.resource.path=/usr/share/jitsi-meet-torture \
 -Djitsi-meet.instance.url=$INSTANCE_URL \
 -Djitsi-meet.isRemote=true \
--Djitsi-meet.jwt=$JWT \
 -Dchrome.disable.nosanbox=true \
 test
