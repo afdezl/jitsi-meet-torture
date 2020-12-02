@@ -130,7 +130,10 @@ public class MalleusJitsificus
                 .appendConfig("config.disable1On1Mode=false")
                 .appendConfig("config.testing.noAutoPlayVideo=true")
 
-                .appendConfig("config.p2p.enabled=" + (enableP2p ? "true" : "false"));
+                .appendConfig("config.p2p.enabled=false");// + (enableP2p ? "true" : "false"));
+
+	    url.clearConfig();
+
             ret[i] = new Object[] { url, numParticipants, timeoutMs, numSenders, numAudioSenders, regions};
         }
 

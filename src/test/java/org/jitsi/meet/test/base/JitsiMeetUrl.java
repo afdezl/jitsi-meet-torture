@@ -122,6 +122,11 @@ public class JitsiMeetUrl
      * current {@link #fragmentParams}, without "?" nor "&" at the beginning.
      * @return a reference to this object.
      */
+
+    public void clearConfig()
+    {
+	fragmentParams = new HashMap<>();
+    }
     public JitsiMeetUrl appendConfig(String extraConfig)
     {
         return appendConfig(extraConfig, true /* overwrite */);

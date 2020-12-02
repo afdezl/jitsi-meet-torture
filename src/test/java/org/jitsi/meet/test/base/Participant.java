@@ -136,6 +136,7 @@ public abstract class Participant<T extends WebDriver>
 
         meetURL.appendConfig(defaultConfig, false /* do not override */);
 
+	meetURL.clearConfig();
         TestUtils.print(getName() + " is opening URL: " + meetURL);
 
         // not hungup, so not joining
