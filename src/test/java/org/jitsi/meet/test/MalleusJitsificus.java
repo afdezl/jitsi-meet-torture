@@ -90,7 +90,7 @@ public class MalleusJitsificus
         String jwt = System.getProperty(JWT);
         if (jwt == null)
         {
-            jwt = ""
+            jwt = "";
         }
 
         String roomNamePrefix = System.getProperty(ROOM_NAME_PREFIX_PNAME);
@@ -123,8 +123,8 @@ public class MalleusJitsificus
             String roomName = roomNamePrefix + i;
             JitsiMeetUrl url
                 = participants.getJitsiMeetUrl()
-                .setRoomName(roomName)
-                .SetJwt(jwt)
+                .setRoomName(i == 0 ? roomNamePrefix : roomName)
+                .setJwt(jwt)
                 // XXX I don't remember if/why these are needed.
                 .appendConfig("config.p2p.useStunTurn=true")
                 .appendConfig("config.disable1On1Mode=false")
@@ -155,6 +155,15 @@ public class MalleusJitsificus
                     i >= numSenders /* no video */,
                     i >= numAudioSenders /* no audio */,
                     regions == null ? null : regions[i % regions.length]);
+	    try
+            {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e)
+            {
+                throw new RuntimeException(e);
+            }
+
         }
 
         for (Thread t : runThreads)
@@ -176,10 +185,11 @@ public class MalleusJitsificus
         JitsiMeetUrl _url = url.copy();
 
         Thread joinThread = new Thread(() -> {
-
+		
             WebParticipantOptions ops
                 = new WebParticipantOptions()
-                        .setFakeStreamVideoFile(INPUT_VIDEO_FILE);
+                        .setFakeStreamVideoFile("resources/fakeVideoStream.y4m");
+
 
             if (muteVideo)
             {
@@ -197,9 +207,21 @@ public class MalleusJitsificus
 
             WebParticipant participant = participants.createParticipant("web.participant" + (i + 1), ops);
             participant.joinConference(_url);
+	  
+
+	    try
+            {
+                Thread.sleep(1000);
+            }
+            catch (InterruptedException e)
+            {
+                throw new RuntimeException(e);
+            }
+	    participant.getToolbar().clickVideoMuteButton();
 
             try
             {
+		
                 Thread.sleep(waitTime);
             }
             catch (InterruptedException e)
