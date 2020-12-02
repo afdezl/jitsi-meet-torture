@@ -36,12 +36,6 @@ public class ParticipantOptions
         = GLOBAL_PROP_PREFIX + ".instance.url";
 
     /**
-     * The jwt of the room to connect to.
-     */
-    public static final String PROP_JWT
-        = GLOBAL_PROP_PREFIX + ".jwt";
-
-    /**
      * The property name for the type of the participant option.
      */
     private static final String PROP_TYPE = "type";

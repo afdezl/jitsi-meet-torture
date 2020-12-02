@@ -52,6 +52,8 @@ public class MalleusJitsificus
         = "org.jitsi.malleus.room_name_prefix";
     public static final String REGIONS_PNAME
             = "org.jitsi.malleus.regions";
+    public static final String JWT
+            = "org.jitsi.malleus.jwt";
 
 
     @DataProvider(name = "dp", parallel = true)
@@ -85,6 +87,12 @@ public class MalleusJitsificus
             regions = regionsStr.split(",");
         }
 
+        String jwt = System.getProperty(JWT);
+        if (jwt == null)
+        {
+            jwt = ""
+        }
+
         String roomNamePrefix = System.getProperty(ROOM_NAME_PREFIX_PNAME);
         if (roomNamePrefix == null)
         {
@@ -116,6 +124,7 @@ public class MalleusJitsificus
             JitsiMeetUrl url
                 = participants.getJitsiMeetUrl()
                 .setRoomName(roomName)
+                .SetJwt(jwt)
                 // XXX I don't remember if/why these are needed.
                 .appendConfig("config.p2p.useStunTurn=true")
                 .appendConfig("config.disable1On1Mode=false")
