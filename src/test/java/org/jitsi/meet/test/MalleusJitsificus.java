@@ -90,7 +90,7 @@ public class MalleusJitsificus
         String jwt = System.getProperty(JWT);
         if (jwt == null)
         {
-            jwt = ""
+            jwt = "";
         }
 
         String roomNamePrefix = System.getProperty(ROOM_NAME_PREFIX_PNAME);
@@ -124,7 +124,7 @@ public class MalleusJitsificus
             JitsiMeetUrl url
                 = participants.getJitsiMeetUrl()
                 .setRoomName(roomName)
-                .SetJwt(jwt)
+                .setJwt(jwt)
                 // XXX I don't remember if/why these are needed.
                 .appendConfig("config.p2p.useStunTurn=true")
                 .appendConfig("config.disable1On1Mode=false")
