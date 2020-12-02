@@ -62,6 +62,8 @@ public class JitsiMeetUrl
      */
     private String serverUrl;
 
+    private String jwt;
+
     /**
      * If set, this should instruct the driver opening the page, that there is
      * an iframe loaded and we need to navigate to it, once it is loaded.
@@ -272,6 +274,19 @@ public class JitsiMeetUrl
     }
 
     /**
+     * Sets the {@link #roomParameters} part of the conference URL.
+     *
+     * @param jwt the conference room jwt without "?" sign at
+     * the beginning.
+     * @return a reference to this object.
+     */
+    public JitsiMeetUrl setJwt(String jwt)
+    {
+        this.jwt = jwt;
+        return this;
+    }
+
+    /**
      * Sets the {@link #serverUrl} part of the conference URL.
      *
      * @param serverUrl a Jitsi Meet server URL (see {@link #serverUrl} for more
@@ -299,6 +314,18 @@ public class JitsiMeetUrl
     public String toString()
     {
         String url = serverUrl + "/" + roomName;
+
+        if (StringUtils.isNotBlank(jwt))
+        {
+            if (StringUtils.isNotBlank(roomParameters))
+            {
+                roomParameters += String.format("&jwt=%s", jwt);
+            }
+            else
+            {
+                roomParameters = String.format("jwt=%s", jwt);
+            }
+        }
 
         if (StringUtils.isNotBlank(roomParameters))
         {

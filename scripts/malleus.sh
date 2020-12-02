@@ -16,8 +16,9 @@ case $1 in
         --hub-url) HUB_URL=$optvalue;;
         --instance-url) INSTANCE_URL=$optvalue;;
         --regions) REGIONS=$optvalue;;
+        --jwt) JWT=$optvalue;;
         *)
-          echo 'Usage: $0 [--conferences=CONFERENCES] [--participants=PARTICIPANTS] [--senders=SENDERS] [--audio-senders=AUDIO_SENDERS] [--duration=DURATION] [--room-name-prefix=ROOM_NAME_PREFIX] [--hub-url=HUB_URL] [--instance-url=INSTANCE_URL] [--regions=REGIONS]' >&2
+          echo 'Usage: $0 [--conferences=CONFERENCES] [--participants=PARTICIPANTS] [--senders=SENDERS] [--audio-senders=AUDIO_SENDERS] [--duration=DURATION] [--room-name-prefix=ROOM_NAME_PREFIX] [--hub-url=HUB_URL] [--instance-url=INSTANCE_URL] [--regions=REGIONS] [--jwt=JWT]' >&2
           exit 1
           ;;
       esac
@@ -53,6 +54,10 @@ case $1 in
 
     if [ -z "$INSTANCE_URL" ]; then
       INSTANCE_URL='https://meet.jit.si'
+    fi
+
+    if [ -z "$JWT" ]; then
+      JWT=''
     fi
     ;;
   *)
@@ -97,5 +102,6 @@ mvn \
 -Dremote.resource.path=/usr/share/jitsi-meet-torture \
 -Djitsi-meet.instance.url=$INSTANCE_URL \
 -Djitsi-meet.isRemote=true \
+-Djitsi-meet.jwt=$JWT \
 -Dchrome.disable.nosanbox=true \
 test
